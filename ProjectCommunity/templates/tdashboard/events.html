@@ -1,0 +1,43 @@
+{% extends 'pdashboard/nav.html' %}
+{% block mainbody %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Page</title>
+</head>
+
+<body>
+    {% if updatesuccess %}
+    <script>alert("Profile Updated Succesfully!! ");</script>
+    {% endif %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Event Page</h1>
+        </div>
+        <div class="profile-content">
+           
+            <!-- {% for event in ProjectEv %} -->
+            <!-- <form action="{% url 'events' %}" method="post">
+                {% csrf_token %}
+                <div class="profile-details">
+                    <input type="text" name="projecteid" value="{{ProjectEv.peid}}"/>
+                    <h2>{{ProjectEv.title}}</h2>
+                    <img src="http://127.0.0.1:8000/media/{{ProjectEv.fronposter}}" alt="profile image" height="250px"
+                    width="200px">
+                    <p>description: {{ProjectEv.description}}</p>
+                    <p>eventdate: {{ProjectEv.eventdate}}</p>
+                    <p>eventtime: {{ProjectEv.eventtime}}</p>
+                    
+                    <button type="submit">Register</button>
+                </div>
+            </form> -->
+                <!-- {% endfor %} -->
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

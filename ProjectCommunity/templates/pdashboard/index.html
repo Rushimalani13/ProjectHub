@@ -1,0 +1,210 @@
+{% extends 'pdashboard/nav.html' %}
+{% block mainbody %}
+{% load static %}
+<!-- <div class="image-container"> -->
+<div class="container" style="background-color:rgb(0, 0, 0);padding-top: 0px;">
+    <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            margin-left: 4px;
+        }
+    </style>
+    <img src="{% static 'img-assets/Project_HUB.gif' %}" alt="Description of image">
+
+
+    <style>
+
+    </style>
+
+
+</div>
+<style>
+    .trending-projects-section {
+        text-align: center;
+        margin: 50px 0;
+
+
+    }
+
+    .trending-projects-section h2 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        margin-left: 40px;
+    }
+
+    .trending-projects-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .trending-project-card {
+        background-color: #fff;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        overflow: hidden;
+        width: 300px;
+        height: 400px;
+        transition: all 0.3s ease-in-out;
+        margin: 8px;
+    }
+
+    .trending-project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .trending-project-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .trending-project-card h3 {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+
+    .trending-project-card p {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    /* .trending-project-card a {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+} */
+    .knowbtn {
+        display: inline-block;
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .trending-project-card a:hover {
+        background-color: #3e8e41;
+    }
+</style>
+<div class="container">
+
+    <div class="trending-projects-section">
+        <h2>Trending Projects</h2>
+        <div class="trending-projects-wrapper">
+
+            {% for i in tp %}
+            <form action="{% url 'treanding' %}" method="post" enctype="multipart/form-data">
+                 {% csrf_token %} 
+                <div class="trending-project-card">
+                    <img src="http://127.0.0.1:8000/media/{{i.frontimg}}" alt="Project Image">
+                    <h3 >{{i.title}}</h3>
+                    <input name="titlekeyword" type="text" value="{{i.title}}" hidden>
+                    <p>{{i.description}}</p>
+                    <button class="knowbtn" type="submit">Know More</button>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+<style>footer {
+    background-color: #222222;
+    color: #ffffff;
+    padding: 50px 0;
+  }
+  
+  footer h4 {
+    color: #070606;
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  
+  footer p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .social li:last-child {
+    margin-right: 0;
+  }
+  
+  .social a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #ffffff;
+    color: #222222;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .social a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    footer {
+      text-align: center;
+    }
+    
+    .social {
+      margin-top: 10px;
+    }
+    
+    .social li {
+      margin-right: 20px;
+    }
+  }
+  </style>
+<footer>
+    <div class="container" style="background-color: darkorchid;">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>About Us</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit ante auctor, tristique velit at, maximus massa. Duis eget risus vel dolor bibendum dignissim eu sit amet est.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Follow Us</h4>
+          <ul class="social">
+            <li><a href="#"><i class="fa fa-facebook"><img src="{% static 'img-assets/facebook.png' %}" alt="fb"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"><img src="{% static 'img-assets/twitter.png' %}" alt="tt"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"><img src="{% static 'img-assets/instagram.png' %}" alt="ig"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i><img src="{% static 'img-assets/linkedin.png' %}" alt="ld"></a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Contact Us</h4>
+          <p>DIEMS College,<br> Aurangabad, MH India<br>Phone: (123) 456-7890<br>Email: info@example.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+<!-- </div> -->
+{% endblock %}

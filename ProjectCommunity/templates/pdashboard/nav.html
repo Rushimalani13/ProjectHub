@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Navbar with Profile Section and Dropdown Menu</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: sans-serif;
+			background-color: #ad58ea;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+            background-color: rgb(106, 224, 224);
+		}
+
+		.logo {
+			font-size: 24px;
+			font-weight: bold;
+			color: #333;
+			text-decoration: none;
+		}
+
+		.nav-links {
+			display: flex;
+			list-style: none;
+		}
+
+		.nav-links li {
+			margin: 0 10px;
+			position: relative;
+		}
+
+		.nav-links li a {
+			color: #000000;
+			text-decoration: none;
+			font-size: 20px;
+			font-weight: bold;
+			transition: color 0.3s ease-in-out;
+		}
+
+		.nav-links li a:hover {
+			color: #ab0505;
+		}
+
+		.menu-icon {
+			font-size: 24px;
+			color: #333;
+			cursor: pointer;
+			display: none;
+		}
+
+		.profile-section {
+			display: flex;
+			align-items: center;
+		}
+
+			.profile-image {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+
+		.profile-name {
+            text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+		}
+
+		.dropdown {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background-color: #ffffff;
+			padding: 10px;
+			display: none;
+            color: #000000;
+			z-index: 1;
+            list-style-type: none;  
+		}
+
+		.dropdown li {
+			margin: 10px 0;
+			position: relative;
+            list-style-type: none;  
+		}
+
+		.dropdown li a {
+			color: #0d0d0d;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: bold;
+			transition: color 0.3s ease-in-out;
+		}
+
+		.dropdown li a:hover {
+            list-style-type: none;  
+			color: #999;
+		}
+
+		.nav-links li:hover .dropdown {
+            list-style-type: none;  
+			display: block;
+		}
+
+		@media screen and (max-width: 768px) {
+			.nav-links {
+				display: none;
+				flex-direction: column;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				background-color: #333;
+				padding: 20px;
+				z-index: 1;
+			}
+
+			.nav-links li {
+				margin: 10px 0;
+				position: relative;
+			}
+
+			.menu-icon {
+				display: block;
+			}
+
+			.profile-section {
+				display: none;
+			}
+		}
+        /* Default styles */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+        }
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background-color: #eadd81;
+        z-index: 1;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .menu-icon .menu-icon__line {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menu-icon.open .menu-icon__line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-icon.open .menu-icon__line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-icon.open .menu-icon__line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+	</style>
+</head>
+<body>
+	<header>
+		<div class="container">
+			<a href="#" class="logo">🅿🆁🅾🅹🅴🅲🆃 🅷🆄🅱</a>
+            <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'allproject' %}">All Projects</a></li>
+            <li><a href="{% url 'upload' %}">Upload</a></li>
+            <li><a href="{% url 'collegelist' %}">College List</a></li>
+            <!-- <li>    
+            <a href="#">Dropdown</a>
+            <ul class="dropdown">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            </ul>
+            </li> -->
+            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'aboutus' %}">About</a></li>
+            <li><a href="mailto:someone@example.com">Help</a></li>
+            
+            </ul>
+			{% if not isteacher %}
+            {% if user_email %}
+            <div class="profile-section">
+            <img src="http://127.0.0.1:8000/media/{{navprofile}}" alt="Profile Image" class="profile-image">
+            <a  href="{% url 'profile' %}" class="profile-name">Profile</a>
+            </div>
+            {% else %}
+            <div class="profile-section">
+                <img src="https://via.placeholder.com/40x40" alt="Profile Image" class="profile-image">
+                <a  href="{% url 'login' %}" class="profile-name" style="color:#150c02;font-size: 18px;">Sign In</a>
+                </div>
+            {% endif %}
+			{% endif %}
+			{% if isteacher %}
+			<div class="profile-section">
+                <img src="http://127.0.0.1:8000/media/{{profile_data.profilePic}}" alt="Profile Image" class="profile-image">
+                <a  href="/admin" class="profile-name" style="color:#150c02;font-size: 18px;">Admin</a>
+                </div>
+			{% endif %}
+            <!-- <div class="profile-section">
+                <img src="https://via.placeholder.com/40x40" alt="Profile Image" class="profile-image">
+                <a  href="#" class="profile-name">John Doe</a>
+                </div> -->
+            
+          
+            <div class="menu-icon">☰</div>
+            </div>
+            </header>
+
+            {% block mainbody %}
+
+            {% endblock %}
+
+            <script>
+                const menuIcon = document.querySelector('.menu-icon');
+                const navLinks = document.querySelector('.nav-links');
+
+                menuIcon.addEventListener('click', () => {
+                    menuIcon.classList.toggle('open');
+                    navLinks.classList.toggle('show');
+                });
+
+            </script>
+</body>
+</html>
+            

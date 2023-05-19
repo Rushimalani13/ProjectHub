@@ -1,0 +1,190 @@
+{% extends 'pdashboard/nav.html' %}
+{% block mainbody %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            margin-top: 10px;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+            padding: 10px 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .profile-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-details {
+            flex: 1;
+            margin-left: 40px;
+        }
+
+        .profile-details h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-details p {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .profile-project-list {
+            margin-top: 40px;
+        }
+
+        .profile-project-list h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-project-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .profile-project-list li {
+            margin-bottom: 10px;
+        }
+
+        .profile-project-list a {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .profile-project-list a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    {% if updatesuccess %}
+    <script>alert("Profile Updated Succesfully!! ");</script>
+    {% endif %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Profile Page</h1>
+            <a class="profile-project-list" href="{% url 'logout' %}"
+                style="border: 2px solid black;padding: 4px;background-color: aqua;text-decoration: none;font-size: 20px;border-radius: 6px;">Logout</a>
+            <a class="profile-project-list" href="{% url 'editprofile' %}"
+                style="border: 2px solid black;padding: 4px;background-color: aqua;text-decoration: none;font-size: 20px;border-radius: 6px;">Edit
+                Profile</a>
+
+        </div>
+        <div class="profile-content">
+            <img src="http://127.0.0.1:8000/media/{{profile_data.profilePic}}" alt="profile image" height="250px"
+                width="200px">
+
+            <div class="profile-details">
+                <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>
+                <p>Email: {{current_user.email}}</p>
+                <p>College: {{profile_data.College}}</p>
+                <p>Course: {{profile_data.course}}</p>
+                <p>Year of Graduation: {{profile_data.passyear}}</p>
+            </div>
+        </div>
+        <div class="profile-project-list">
+
+            <div class="project-list">
+                <h2>Project List</h2>
+                <style>
+                    .project-list {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        text-align: center;
+                    }
+
+                    .project {
+                        border: 1px solid #ccc;
+                        padding: 20px;
+                        margin-bottom: 20px;
+                        text-align: left;
+                    }
+
+                    .project h3 {
+                        margin-top: 0;
+                    }
+
+                    .download-button {
+                        display: inline-block;
+                        background-color: #2196F3;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        text-decoration: none;
+                        transition: background-color 0.3s;
+                    }
+
+                    .download-button:hover {
+                        background-color: #0D47A1;
+                        cursor: pointer;
+                    }
+                </style>
+                <ul>
+
+                    {% for item in upload_project %}
+                    <li>
+                        <div class="project">
+
+                            <h3>{{item.projectname}}</h3>
+                            <p>{{item.description}}</p>
+                            <a href="http://127.0.0.1:8000/media/{{item.zip_project}}"
+                                class="download-button">Download</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+{% endblock %}

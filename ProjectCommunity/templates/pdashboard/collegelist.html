@@ -1,0 +1,101 @@
+{% extends 'pdashboard/nav.html' %} 
+{% block mainbody %}
+<style>
+ .vertical-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ulcl {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.licl {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(31, 160, 29);
+}
+
+.item img {
+  width: 40%;
+  height: auto;
+  padding: 14px;
+}
+
+.item-details {
+  width: 60%;
+  padding: 20px;
+}
+
+.item-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.item-description {
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.know-more-button {
+  display: inline-block;
+  background-color: #555;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.know-more-button:hover {
+  background-color: #333;
+}
+@media only screen and (max-width: 600px) {
+  .item img {
+  width: 100%;
+  height: auto;
+  padding: 14px;
+  display: none; 
+}
+
+}
+
+</style>
+<div class="container" style="background-color: dimgrey;">
+  
+  <div class="vertical-list">
+
+  {% for x in colleges %}
+    <ul class="ulcl">
+     
+      <li class="licl"> </li>
+      <li class="licl">
+        <div class="item">
+          <img src="http://127.0.0.1:8000/media/{{x.outputSS}}" alt="Item Image">
+          <div class="item-details">
+            <h2 class="item-name"  style="font-size: 32px;">{{x.name}}</h2>
+            <p class="item-description" style="font-size: 18px;">{{x.description}}</p>
+            <p class="item-description" style="font-size: 20px;"><B>Location: </B>{{x.location}}</p>
+            <!-- <a href="#" class="know-more-button">Know More</a> -->
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+  
+{% endblock %}
