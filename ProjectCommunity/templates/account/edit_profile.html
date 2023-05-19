@@ -1,0 +1,157 @@
+{% extends 'pdashboard/nav.html' %}
+{% block mainbody %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            margin-top: 10px;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+            padding: 10px 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .profile-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-details {
+            flex: 1;
+            margin-left: 40px;
+        }
+
+        .profile-details h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-details p {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .profile-project-list {
+            margin-top: 40px;
+        }
+
+        .profile-project-list h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-project-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .profile-project-list li {
+            margin-bottom: 10px;
+        }
+
+        .profile-project-list a {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .profile-project-list a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        input {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-container">
+        <form action="{% url 'editprofile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="profile-header">
+                <h1>Edit Profile</h1>
+
+            </div>
+
+            <label for="uploadimg"><b>Upload Profile:</b></label>
+            <input type="file" name="profilepic" id="profilepic" accept="image/*" required>
+            <div class="profile-content">
+
+                <div class="profile-details">
+                    <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>
+                    <p>Email: {{current_user.email}}</p>
+                    <p>Mobile: <input type="text" id="pnumber" name="pnumber" required></p>
+                    <p>College: <input type="text" id="College" name="College" required></p>
+                    <p>Course: <input type="text" id="Course" name="Course" required></p>
+                    <p>Year of Graduation: <input type="text" id="Year" name="Year" required></p>
+                </div>
+
+            </div>
+            <button type="submit" class="profile-project-list" style=" border: 2px solid black;padding: 4px;background-color: aqua;text-decoration:
+            none;font-size: 20px;border-radius: 6px;">Save
+                Changes</button>
+            <div class="profile-project-list">
+                <h2>My Projects</h2>
+                <ul>
+                    <li>
+                        <a href="#">Project 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Project 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Project 3</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </form>
+    </div>
+
+
+</body>
+
+</html>
+{% endblock %}
